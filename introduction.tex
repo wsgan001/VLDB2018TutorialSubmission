@@ -1,0 +1,148 @@
+
+
+%\begin{compact_item}
+%\item \textbf{Duration:} The tutorial can be formatted to either 1.5 hours or 3 hours. We propose the \textbf{1.5 hour} format. See reasoning in Section~\ref{sec:duration}.
+%\item \textbf{Target Audience:} Given the amount of activity on database applied R\&D and the large number of practitioners working with semistructured data (esp. JSON) in the Bay Area, the tutorial is addressed to both academic researchers and such industry parties. The tutorial is also addressed to the database researcher and/or database practitioner who is interested in NoSQL, SQL/JSON and (broadly) semistructured data querying, although she may not be knowledgeable on the topic(s) currently.
+%\end{compact_item}
+
+\section{Introduction}
+This is a summary of the SIGMOD 2016 tutorial. \textit{The reader is referred to \textbf{http://db.ucsd.edu/TutorialSIGMOD16/} for the complete material, which includes the full presented slideware and extended companion papers.}
+
+
+\section{Topic and Audience of This Tutorial}
+Numerous databases promoted as SQL-on-Hadoop, NewSQL and NoSQL support Big Data applications. These databases generally support the 3Vs.% \cite{big-data-3v-oreilly-2012} 
+(i) Volume: amount of data (ii) Velocity: speed of data in and out (iii) \emph{Variety}: semi-structured, schemaless and heterogeneous data, which is the focus of this tutorial. Due to the Variety requirement, many databases have adopted semi-structured data models, which are generally slightly different subsets of enriched JSON. The databases provide corresponding query languages. 
+
+In addition to these {\em genuine JSON databases} that utilize variants of JSON as their data model, relational databases also provide special functions and language features for the support of JSON columns, often piggybacking on non-1NF (non first normal form) features that SQL acquired over the years. We refer to SQL databases with JSON support as {\em SQL/JSON databases}. 
+
+In total, the tutorial's evolving companion survey 
+%\cite{sqlpp-survey-2015} 
+discusses the following as of April 2016 (and potentially more by the time the reader accesses it).
+
+\begin{compact_enum}
+\item Apache Hive \cite{hive-icde-2010} (description of Hive largely applicable to Cloudera Impala \cite{impala} also)
+\item IBM Jaql \cite{jaql-pvldb-2011}
+\item Apache Pig \cite{pig-sigmod-2008}
+\item Apache Cassandra CQL \cite{cassandra-osr-2010}
+\item MongoDB \cite{mongodb}
+\item Couchbase's N1QL \cite{couchbase,couchbase-sigmod-2016}
+\item JSONiq \cite{jsoniq-ieee-ic-2013}
+\item AsterixDB's AQL \cite{asterixdb-dpd-2011-all-authors}
+\item Google Big Query (aka Dremel \cite{dremel-pvldb-2010})
+\item Mongo JDBC \cite{unityjdbc} (a JDBC driver provided by the UnityJDBC middleware for SQL-compliant access to MongoDB)
+\item SQL-92 - as the anchor of SQL compliance
+\end{compact_enum}
+
+Myriads of developers and researchers currently use genuine JSON databases as well as SQL/JSON databases. Database builders and researchers work on expanding the databases' query language abilities. Both parties face the challenges described below regarding surveying and comparing models and query languages, past and present. This tutorial provides a deep understanding of the current data models and query languages of genuine JSON and SQL/JSON databases, hence enabling comparisons. 
+
+The tutorial does not limit itself to the current status of JSON querying: The database builders and researchers need to draw lessons from the rich body of past research on nested \cite{nest-unnest-pods-1982,nested-relational-vldb-1988,nested-relational-workshop-lncs-1989}, object-oriented \cite{oql-dbpl-1989} and semistructured data models and querying \cite{xml-ql-computer-networks-1999,xml-query-language-survey-sigmod-record-2000,xquery-3.0-w3c-2013}, which have been a topic of intense database research: They were first researched in the form of labeled graphs in the mid-90s. Then semistructured data research boomed in the form of XML and its labeled tree abstraction. The current industrial boost to semistructured data emerged primarily from startups, often on the mobile and web space, that utilize Javascript and JSON.%
+\footnote{Their JSON motivation is essentially the same one that the early semistructured research works had: flexible, schemaless data. Douglas Crockford's book ``Javascript: The Good Parts" characteristically muses about JSON that ``the less we need to agree on in order to interoperate, the more easily we can interoperate".
+}
+Many of the important language design issues of the first eras must be recalled in the new era of semistructured data.
+
+Similarly, when it comes to implementations, we discuss set-at-a-time algebras for semistructured and object-oriented data, in the interest of transferring into the new space time-tested lessons on algebra-based relational query processing as well as lessons from set-at-a-time algebras from past research on nested relational algebra, OQL and XQuery \cite{GTP,XAT,OQL,SAL,DanaVLDB2004,Re06,MichielsTreePattern07,IoanaFQAS06,NicoleSerge,WiscMaier,Sartiani-Algebra,TAX,Enosys,Timber,NatixVLDBJ,Rainbow}. 
+
+More broadly, we compare SQL (which we use as a baseline) with the recent crop of semistructured databases and connect the recent activity around JSON querying to the (much richer) past activity on nested relational, OQL and XML/labeled tree models and respective query languages and implementations. 
+
+\section{Challenges in Comprehending the Space of Semistructured DBs}
+A first challenge is that the evolving query languages have many variations. Some variations are due to superficial syntactic differences that simply create ``noise" when one tries to understand and compare systems. However, other variations are genuine differences in query language capabilities and semantics.
+
+Indeed, the evolving query languages of both the genuine semistructured databases and the SQL/JSON databases fall short of full-fledged semi-structured query language capabilities.%
+\footnote{Most genuine semistructured databases also fall significantly short of full-fledged SQL capabilities, which is not surprising since many commercial JSON databases started as key-value and document-oriented databases.}
+The designers of the new query languages can gain by understanding and picking the salient features of past full-fledged \textit{declarative} query languages for non-relational data models: OQL \cite{oql-dbpl-1989}, the nested relational model \cite{nest-unnest-pods-1982,nested-relational-vldb-1988,nested-relational-workshop-lncs-1989}, 
+XQuery, and other XML query languages \cite{xquery-3.0-w3c-2013,xml-ql-computer-networks-1999,xml-query-language-survey-sigmod-record-2000}.
+
+Part of the confusion around current genuine JSON query languages is derived from the lack of compatibility with the well known SQL. In the interest of broadening the audience, this tutorial assumes that the audience is well-aware of SQL and the standard material of graduate textbooks on SQL system implementation. The tutorial does not assume knowledge of other query languages. Consequently we explain the JSON model and query languages as minimal extensions to SQL.S
+
+Similarly, part of the confusion and the large semantics behind SQL/JSON is due to the retrofit of SQL for JSON columns, while certain limitations of SQL (such as the need of a schema) remain in place. Again, the tutorial does not require knowledge of non-1NF, often proprietary, features that have been added to SQL. Rather it only requires textbook SQL-92 language and teaches the non-1NF concepts.
+
+A final challenge in understanding the new space of semistructured data is the lack of a succinct, mathematically clear, formal syntax and semantics by the vendors. 
+%SQL/JSON vendors efforts towards a upgrading on SQL generate unecessarily large syntax and semantics.
+
+In summary, the mentioned challenges and confusions hurt researchers and developers:
+
+\begin{enumerate}
+\item They inhibit a deep understanding of the capabilities and important idiosyncracies of the various query languages. Potential users can be lost in superficial details and miss fundamental points.
+\item They impede progress towards declarative languages and systems for querying semi-structured data. Language designers and query processor implementors need to appreciate the available options, in order to proceed to well-designed fully-fledged languages and efficient implementations thereof. 
+\end{enumerate}
+
+
+\section{A systematic survey of model and language options and variations} 
+\noindent \textbf{Step 1: Extending the relational model and SQL for semistructured} As discussed above, part of the confusion is derived from the lack of compatibility with the well known, baseline SQL, which both researchers and practitioners generally understand. Therefore, the first step of this tutorial towards explaining the large space of current and past works is the introduction of \emph{Configurable SQL++}. Neglecting temporarily the ``configurable" aspect (discussed in Step~2), one may think of SQL++ as a semi-structured query language, based on extending SQL with a minimal number of features. SQL++ is {\em backwards compatible} with the ``textbook" SQL-92 and mostly backwards compatible with other relevant features of the SQL standard. (The cases where it is not, such as differences in type coercion, lend themselves to interesting discussed comparisons.) Hence SQL++ can be easily understood by SQL programmers and researchers.
+
+The enabler of the relatively easy extension from SQL to genuine JSON database capability is that the semi-structured SQL++ data model is a superset of both JSON and the SQL data model. One should think of JSON objects as tuples. Then the SQL++ model can be thought of as expanding JSON with bags (as opposed to having JSON arrays only) and enriched values, i.e., atomic values that are not only numbers and strings (vendors have already made this extension).
+Vice versa, one may think of SQL++ as expanding SQL with JSON features: arrays, heterogeneity, and the possibility that any value may be an arbitrary composition of the array, bag and tuple constructors, hence enabling arbitrary nested structures, such as arrays of arrays. Consequently, the SQL++ query language inputs and outputs SQL++ data. Notice that there was no such straightforward correspondence between the XML model and relational, primarily due to the lack of explicit tuples in XML.
+
+Then we incorprorate into SQL++ salient features of past full-fledged \textit{declarative} query languages for non-relational data models: SQL non-1NF features (starting with SQL 2003), OQL,
+% \cite{oql-dbpl-1989}, 
+the nested relational model and query languages,
+% \cite{nest-unnest-pods-1982,nested-relational-vldb-1988,nested-relational-workshop-lncs-1989} 
+and XQuery (and other XML-based query languages).
+% \cite{xquery-3.0-w3c-2013,xml-ql-computer-networks-1999,xml-query-language-survey-sigmod-record-2000}. 
+For example, in the spirit of XQuery, JSONiq and OQL, SQL++ is a fully composable and semi-structured language, hence being able to input and output nested and heterogeneous structures. In this tutorial, a new student/researcher of semistructured data, who missed the OQL and XQuery eras, will be able to absorb the essential teachings of XQuery while they are succinctly cast as a {\em minimally modified SQL}. We describe these modifications next, which will enable an audience member with SQL background to comprehend the fundamentals of the extension to genuine JSON databases with minimal effort.
+
+\noindent {\em Minimal semantics changes}  Instead of inventing (or re-inventing) multiple syntactic/semantic features for the same fundamental functions (something that, as we show, occassionally happens in SQL/JSON databases), the extension from SQL to SQL++ is most often achieved simply by {\em removing} semantic restrictions of SQL. Here are a few examples:
+\begin{compact_enum}
+\item Unlike SQL's \texttt{FROM} clause variables, which bind to tuples only, the FROM clause variables of SQL++ bind to any JSON element.
+\item SQL++ is fully composable in the sense that subqueries can appear anywhere, potentially creating nested results when they appear in the \texttt{SELECT} clause.
+\item While correlation of the subqueries in a \texttt{FROM} clause is not allowed in SQL-92, the SQL++ subqueries of a \texttt{FROM} clause may be freely correlated with (earlier defined) variables of the same \texttt{FROM} clause.
+\item The groups created by the \texttt{GROUP BY} are directly usable in nested queries - as opposed to SQL's approach where they may only participate in aggregate functions in very limited and particular ways. Interestingly, the SQL++ approach ends up explaining in a simple, formal way even SQL's grouping and aggregation.
+\item Unlike SQL, the SQL++ semantics do not require schema or any homogeneity on the input data. 
+\end{compact_enum}
+
+A complete specification of SQL++ can be found in \cite{sqlpp-survey-2015}.
+Notice that features~2 to~4 above are also present in SQL 2003, which includes many 1NF features. In the interest of unifying genuine JSON databases with non-1NF features of SQL, this tutorial explains such features using SQL++, which leads to syntax and semantics succinct and significantly shorter than the SQL 2003 specification. A key methodology that leads to short, succinct semantics is the staging, which reminds of XQuery's specification: First we define an {\em SQL++ core}. Consequently, additional features and SQL compatibility is achieved as syntactic sugar over the core. 
+
+Besides restriction removals, some extensions are also presented. For example, pivoting the tuples' attribute/value pairs to columns is a feature of some databases. Therefore, SQL++ can allow a pair of variables of the \texttt{FROM} clause to range over the attribute name and attribute value pairs of input tuples. Similarly, when a \texttt{FROM} clause ranges over an array, SQL++ allows a pair of variables to capture the data at an array position and the index of this position. In this way SQL++ seamlessly expands the logic of SQL to ``schema'' inspection and arrays.
+
+SQL++ shows positive early adoption signs: Couchbase and UCI's AsterixDB are in the process of adopting SQL++.%
+\footnote{The tutorial's author has collaborated with the AsterixDB and Couchbase teams on specifying SQL++.}
+An earlier version of SQL++ has been used by the federated query processor of the UCSD FORWARD application development platform \texttt{http://forward.ucsd.edu/sqlpp}.
+
+After having taught Step 1, we will show that multiple model and language differences are superficial syntactic differences.
+
+\noindent \textbf{Step 2: Substantial Semantic Differences between Databases} However, not all differences are superficial. Furthermore, this tutorial does not suggest that SQL++ (or some close descendant thereof) will become a standard and remove the many variations that are now found in this space. If nothing else, the gap between genuine JSON databases and SQL/JSON is relatively deep as SQL/JSON is very much based on tables and semantics around tables. Furthermore, via communication with genuine JSON database vendors we recognize that a model and query language standard is premature for such a young and fast-evolving area. Yet, the language designers and researchers need to know now the design options that are available to them and the options that have been used by others, especially as it pertains to the handling of semi-structured aspects (semantics for missing attributes, heterogeneous types, etc), which are not captured by the SQL backwards compatibility. 
+Towards this goal the tutorial utilizes an extension of SQL++ into Configurable SQL++, which is essentially a guery language generator. Depending on the options that are chosen for various features, different capabilities are assumed and different semantics emerge.
+
+The Configurable SQL++ explains the multiple options that language designers have and the options they have chosen in current systems. The Configurable SQL++ includes {\em configuration options} that describe 
+\begin{compact_enum}
+\item which features are supported and 
+\item (for the supported features) different options of language semantics that formally capture the variations of existing database query languages. 
+\end{compact_enum}
+
+One particular example where configuration options capture differences concisely, is the behavior of paths of the various query languages in the absence of information. For example, consider a JSON object \gt{\{a:1, b:2\}} and a path that navigates into the absent path \gt{c}. Languages differ on what is the result of \gt{c}. Is it an error? Is it a special value? If it is a special value, how does it behave in other features of the query language? Is the query writer given control on what special value may emerge or whether an error will be thrown? A configuration option captures these differences precisely. 
+
+By appropriate choices of configuration options, the Configurable SQL++ semantics morphs into the semantics of other query languages. Hence, the audience will be able to understand the essential differences between the various query languages, without being swamped by their superficial syntactic differences. Given the time constraints, the comparisons will be mostly around the SQL standard, three well known databases (Cassandra CQL, MongoDB, Couchbase N1QL) and one academia-originating system (AsterixDB AQL). Selected features will be explained as particular settings of various configuration options. The reader can find the ``configuration options" surveying approach, as well as coverage of additional databases, in the companion documents of this tutorial at \textbf{http://db.ucsd.edu/TutorialSIGMOD16/}.  
+
+We expect that some of the results listed in the feature matrices describing configuration options will change in the next years as the space evolves rapidly.
+Despite the forthcoming changes, we expect Configurable SQL++ to remain a standing tool in understanding the space, since by understanding each database's capabilities in terms of applicable options, the reader can focus on the fundamental differences of the databases. To further facilitate understanding of Configurable SQL++ and the effect of the various configuration options, we provide a web-accessible reference implementation of Configurable SQL++ at \texttt{http://forward.ucsd.edu/sqlpp}.
+
+Finally, with respect to configurability, we note the potential applicability of the formal capture (by the Configurable SQL++) of capability and semantic differences in the area of polystore querying and query rewriting \cite{DugganESBHKMMMZ15}.
+
+\noindent \textbf{Step 3: Additional Features} We will also discuss features, many of which coming from XQuery, that have not been captured by configuration options and are not present in current industrial languages.  These will prompt a more open-ended discussion of language designs and tradeoff's. A notable one is type coercion - the approaches and the pros and cons.
+
+\noindent \textbf{Step 4: Set-at-a-time Algebras}
+It is desirable that the processing of semistructured queries by genuine JSON databases leverages existing SQL query processing techniques. A distinguishing feature of SQL query processing is the utilization of algebraic plans that consist of set-at-a-time operators. The tutorial shows next that SQL++ query processing can be based on a {\em SQL++ algebra}, which is a set-at-a-time algebra that extends the relational algebra. The point is particularly relevant to genuine JSON databases, as they evolve from key-value stores to full-blown databases.
+
+The SQL++ algebra is representative of multiple algebras that were proposed and used in the context of semistructured and nested data. It combines ideas that had first appeared in the context of set-at-a-time algebras for XQuery and OQL. Nested relational algebras are also explained as a subset of the SQL++ algebra.%
+
+In the interest of capturing multiple algebraic approaches, we present a non-minimal set of algebraic operators, along with algebraic equivalences that explain how certain operators can be replaced by others. The provided equivalences explain how the various approaches connect to each other, while the commentary highlights the tradeoffs.
+
+\noindent \textbf{Open Issues} Finally, we emphasize open issues in the expansion from structured to semistructured querying (dealing with lack of typing, potential expansions to include graphs) and briefly discuss interoperability challenges induced by language differences.
+
+\section{Other Data}
+\label{sec:duration}
+
+\noindent \textbf{Prerequisite Knowledge} 
+\label{sec:audience}
+The attendees must have solid knowledge of SQL-92, since it is the baseline upon which the semistructured aspects are then added. Also solid knowledge of relational algebra. Knowledge of SQL-2003 and/or XQuery are a plus but not required.
+
+\noindent \textbf{Relevant Aspects of Presenter's Bio} 
+Yannis Papakonstantinou is a Professor of Computer Science and Engineering at UCSD. A common theme of his research is the extension of database platforms and query processors beyond centralized relational databases and into semistructured databases, integrated views of distributed databases and web services, textual data and queries involving keyword search. His research has received more than 12,500 citations, according to Google Scholar, most of which refer to his work on semistructured data, semistructured query processing and related middleware.
+
+In addition to his academic activity in middleware, semistructured data and query processing, Yannis was the Chief Scientist of Enosys Software, which built and commercialized an early Enterprise Information Integration platform for structured and semistructured data, utilizing XML and XQuery. The Enosys Software was OEM'd and sold under the BEA Liquid Data and BEA Aqualogic brand names, eventually acquired in 2003 by BEA Systems.
+
+\noindent \textbf{Acknowledgments} 
+The presenter thanks his coauthors of \cite{sqlpp-extended-corr-2015} and \cite{sqlpp-survey-2015}, on which most of this tutorial presentation is based on.
+
+Many of the language-related aspects of the proposed tutorial have been presented by Yannis Papakonstantinou during the past year at talks at the following companies and universities that develop NoSQL databases,  SQL-on-Hadoop databases or middleware that operates over them: Amazon, Couchbase, MapR, Informatica (which develops middleware for data warehousing and virtual databases over SQL, NoSQL, Hadoop-on-SQL and NewSQL databases), Pivotal. The above talks led to very useful feedback.

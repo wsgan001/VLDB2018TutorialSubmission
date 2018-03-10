@@ -1,0 +1,169 @@
+\documentclass{sig-alternate-05-2015}
+
+
+\input{preamble}
+
+% http://tex.stackexchange.com/questions/32683/rotated-column-titles-in-tabular
+\usepackage{adjustbox}
+\newcolumntype{R}[2]{%
+    >{\adjustbox{angle=#1,lap=\width-(#2)}\bgroup}%
+    l%
+    <{\egroup}%
+}
+\newcommand*\rot[2]{\multicolumn{1}{R{#1}{#2}}}% no optional argument here, please!
+
+\usepackage{pifont}
+\usepackage{wasysym}
+
+
+\newcolumntype{B}{|@{~}r@{~}|@{~}l@{~}c@{~}l@{~}|}  % (B)NF
+\newcolumntype{E}{@{}l@{~}c@{~}l@{}}                % (E)valuation Semantics
+\newcolumntype{N}{@{}l@{}}                          % (N)arrow
+
+\newcommand{\header}[1]{\multicolumn{1}{c|}{\textbf{#1}}}
+\newcommand{\feature}[1]{\textbf{#1}:}
+
+
+\begin{document}
+
+% Copyright
+%\setcopyright{acmcopyright}
+\setcopyright{acmlicensed}
+%\setcopyright{rightsretained}
+%\setcopyright{usgov}
+%\setcopyright{usgovmixed}
+%\setcopyright{cagov}
+%\setcopyright{cagovmixed}
+
+\CopyrightYear{2016} 
+\isbn{978-1-4503-3531-7/16/06}
+\acmPrice{\$15.00}
+\doi{http://dx.doi.org/10.1145/2882903.2912573}
+\conferenceinfo{SIGMOD'16,}{June 26-July 01, 2016, San Francisco, CA, USA}
+
+
+%------------------------------------------------------------------------------- 
+% Macros
+%------------------------------------------------------------------------------- 
+
+% Set the version text flags on the "optional" package
+%\setversiontextflags
+
+% Redefine \_ for a shorter rule, so that BNF non-terminals with two (or more words) are compacted together
+% http://tex.stackexchange.com/questions/4375/chardef-and-underscore
+%\DeclareTextCommand{\_}{T1}{\leavevmode \kern.06em\vbox{\hrule width.4em}}
+
+%\def\sugar{\cellcolor[gray]{0.8}}
+\def\sugar{\rowcolor[gray]{0.85}}
+
+\def\sql{A}
+\def\cql{B}
+\def\mongodb{C}
+\def\nickel{D}
+\def\aql{E}
+\def\jaql{F}
+
+\def\env{\mathrm{\Gamma}}
+
+\def\yes{$\checkmark$}
+\def\error{$\times$}
+\def\true{\texttt{t}}
+\def\false{\texttt{f}}
+\def\nulloption{\texttt{n}}
+\def\missing{\texttt{m}}
+\def\counter{\texttt{c}}
+\def\partial{\LEFTcircle}
+\def\irrelevant{-}
+\def\inconsistent{\ding{106}}
+% \def\same{\cellcolor[gray]{0.8}}
+
+\def\ground{G}
+\def\collscan{S^C}
+\def\outercollscan{O^C}
+\def\tuplescan{S^T}
+\def\outertuplescan{O^T}
+\def\tuplenav{N^T}
+\def\arraynav{N^A}
+\def\constructcoll{C^C}
+\def\constructtuple{C^T}
+\def\applyplan{\alpha}
+\def\corr{R}
+\def\flat{F}
+
+\def\evalto{\leadsto}
+\def\group{f_\texttt{GROUP}}
+\def\order{<^o}
+%\def\order{f_\texttt{ORDER}}
+\def\arr{\operatorname{array}}
+\def\bag{\operatorname{bag}}
+\def\tuple{\operatorname{tuple}}
+\def\map{\operatorname{map}}
+\def\fst{\operatorname{fst}}
+\def\sub{\operatorname{sub}}
+\def\sort{\operatorname{sort}}
+\def\setop{\operatorname{set\_op}}
+\def\union{\operatorname{union}}
+\def\unionall{\operatorname{union\_all}}
+\def\intersect{\operatorname{intersect}}
+\def\intersectall{\operatorname{intersect\_all}}
+\def\except{\operatorname{except}}
+\def\exceptall{\operatorname{except\_all}}
+\def\setopeq{\overset{@}{=}}
+
+\newcommand{\inrecord}[1]   { {#1}_{\operatorname{in}} } % {\dot{#1}}
+\newcommand{\outrecord}[1]  { {#1}_{\operatorname{out}} } % {\ddot{#1}}
+\newcommand{\inbinding}[1]  { {#1}_{\operatorname{in}} }
+\newcommand{\outbinding}[1] { {#1}_{\operatorname{out}} }
+
+\newcommand{\id}[1]{{#1}^{id}}
+
+\newcommand{\update}[2]{\gl{update}(#1,#2)}
+\newcommand{\insertbag}[2]{\gl{insertinbag}(#1,#2)}
+\newcommand{\inserttuple}[3]{\gl{inserinttuple}(#1,#2,#3)}
+\newcommand{\append}[2]{\gl{append}(#1,#2)}
+\newcommand{\delete}[1]{\gl{delete}(#1)}
+\newcommand{\insertorder}[2]{\gl{insertorder}(#1,#2)}
+
+
+\newcommand{\highlight}[1]{\noindent\textbf{#1:}}
+
+
+\title{Semistructured Models, Queries and Algebras in the Big Data Era
+\titlenote{Supported by NSF IIS129263, NSF SHB1237174, Informatica Inc. gift and Couchbase Inc. gift.}
+}
+\subtitle{[Tutorial Summary]}
+
+\numberofauthors{1}
+
+\author{
+\alignauthor Yannis Papakonstantinou\\
+\affaddr{Computer Science and Engineering, UCSD}\\
+\email{yannis@cs.ucsd.edu}
+}%
+
+
+\maketitle
+
+\begin{abstract}
+Numerous databases promoted as SQL-on-Hadoop, NewSQL and NoSQL support semi-structured, schemaless and heterogeneous data, typically in the form of enriched JSON. They also provide corresponding query languages.
+In addition to these {\em genuine JSON databases}, relational databases also provide special functions and language features for the support of JSON columns, typically piggybacking on non-1NF (non first normal form) features that SQL acquired over the years. We refer to SQL databases with JSON support as {\em SQL/JSON databases}. 
+
+The evolving query languages present multiple variations: Some are superficial syntactic ones, while other ones are genuine differences in modeling, language capabilities and semantics. Incompatibility with SQL presents a learning challenge for genuine JSON databases, while the table orientation of SQL/JSON databases often leads to cumbersome syntactic/semantic structures that are contrary to the semistructured nature of JSON. Furthermore, the query languages often fall short of full-fledged semistructured query language capabilities, when compared to the yardstick set by XQuery and prior works on semistructured data (even after superficial model differences are abstracted out). 
+
+We survey features, the designers' options and differences in the approaches taken by actual systems. In particular, we first present a SQL backwards-compatible language, named \emph{SQL++}, which can access both SQL and JSON data. SQL++ is expected to be supported by Couchbase's CouchDB and UCI's AsterixDB semistructured databases. Then we expand SQL++ into the \emph{Configurable SQL++}, whereas multiple possible (and different) semantics are formally captured by the multiple options that the language's semantic configuration options can take. We show how appropriate setting of the configuration options morphs the Configurable SQL++ semantics into the semantics of 10 surveyed languages, hence providing a compact and formal tool to understand the essential semantic differences between different systems. We briefly comment on the utility of formally capturing semantic variations in polystore systems.
+
+Finally we discuss the comparison with prior nested and semistructured query languages (notably OQL and XQuery) and describe a key aspect of query processor implementation: set-oriented semistructured query algebras. In particular, we transfer into the JSON era lessons from the semistructured query processing research of the 90s and 00s and combine them with insights on current JSON databases. Again, the tutorial presents the algebras' fundamentals while it abstracts away modeling differences that are not applicable.
+\end{abstract}
+
+\begin{sloppypar}
+
+\input{introduction}
+
+\end{sloppypar}
+
+
+% Bibliography
+\bibliographystyle{abbrv}
+\bibliography{main,lot}
+
+\end{document}
