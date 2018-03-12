@@ -112,6 +112,10 @@ D.~Florescu, C.~Hillery, D.~Kossmann, P.~Lucas, F.~Riccardi, T.~Westmann,
 Apache tinkerpop3 gremlin.
 \newblock \url{http://tinkerpop.apache.org/docs/current/reference/}.
 
+\bibitem{gsql}
+Tigergraph's gsql.
+\newblock \url{http://doc.tigergraph.com/GSQL-Tutorial-and-Demo-Examples.html}.
+
 \bibitem{nest-unnest-pods-1982}
 G.~Jaeschke and H.-J. Schek.
 \newblock Remarks on the algebra of non first normal form relations.
@@ -138,6 +142,11 @@ S.~Melnik, A.~Gubarev, J.~J. Long, G.~Romer, S.~Shivakumar, M.~Tolton, and
   T.~Vassilakis.
 \newblock Dremel: Interactive analysis of web-scale datasets.
 \newblock {\em PVLDB}, 3(1):330--339, 2010.
+
+\bibitem{websql}
+A.~O. Mendelzon, G.~A. Mihaila, and T.~Milo.
+\newblock Querying the world wide web.
+\newblock {\em Int. J. on Digital Libraries}, 1(1):54--67, 1997.
 
 \bibitem{MichielsTreePattern07}
 P.~Michiels, G.~A. Mihaila, and J.~Sim\'eon.
@@ -192,6 +201,10 @@ M.~A. Roth, H.~F. Korth, and A.~Silberschatz.
 C.~Sartiani and A.~Albano.
 \newblock Yet another query algebra for {XML} data.
 \newblock In {\em IDEAS}, 2002.
+
+\bibitem{sparksql}
+Apache spark sql.
+\newblock \url{https://spark.apache.org/sql/}.
 
 \bibitem{hive-icde-2010}
 A.~Thusoo, J.~S. Sarma, N.~Jain, Z.~Shao, P.~Chakka, N.~Zhang, S.~Anthony,
