@@ -71,6 +71,10 @@ S.~Cluet and G.~Moerkotte.
 Couchbase.
 \newblock \url{http://www.couchbase.com/}.
 
+\bibitem{cypher}
+{Neo4j}'s query language {Cypher}.
+\newblock \url{https://neo4j.com/developer/cypher-query-language/}.
+
 \bibitem{xml-ql-computer-networks-1999}
 A.~Deutsch, M.~F. Fern{\'a}ndez, D.~Florescu, A.~Y. Levy, and D.~Suciu.
 \newblock A query language for {XML}.
@@ -195,6 +199,10 @@ S.~D.~. Viglas, L.~Galanis, D.~J. DeWitt, D.~Maier, and J.~F. Naughton.
 \newblock Putting {XML} query algebras into context.
 \newblock Available at:~\textsf{\small
   http://www.cs.wisc.edu/niagara/Publications.html}.
+
+\bibitem{XQuery}
+The {XQ}uery language.
+\newblock www.w3.org/TR/xquery, 2004.
 
 \bibitem{XAT}
 X.~Zhang, B.~Pielech, and E.~Rundensteiner.
