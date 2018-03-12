@@ -91,6 +91,11 @@ J.~Duggan, A.~J. Elmore, M.~Stonebraker, M.~Balazinska, B.~Howe, J.~Kepner,
 \newblock The bigdawg polystore system.
 \newblock {\em {SIGMOD} Record}, 44(2):11--16, 2015.
 
+\bibitem{struql}
+M.~F. Fern{\'{a}}ndez, D.~Florescu, A.~Y. Levy, and D.~Suciu.
+\newblock Declarative specification of web sites with strudel.
+\newblock {\em {VLDB} J.}, 9(1):38--55, 2000.
+
 \bibitem{NatixVLDBJ}
 T.~Fiebig, S.~Helmer, C.~Kanne, G.~Moerkotte, J.~Neumann, R.~Schiele, and
   T.~Westmann.
