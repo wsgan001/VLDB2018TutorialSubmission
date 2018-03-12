@@ -128,31 +128,43 @@
 \newcommand{\highlight}[1]{\noindent\textbf{#1:}}
 
 
-\title{Semistructured Models, Queries and Algebras in the Big Data Era
+\newcommand{\arem}[1]{{\begin{small}\color{blue}{#1\ --alin}\end{small}}}
+\newcommand{\yrem}[1]{{\begin{small}\color{red}{#1\ --yannis}\end{small}}}
+\newcommand{\eat}[1]{}
+
+\title{Graph Data Models, Query Languages and Programming Paradigms
 \titlenote{Supported by NSF IIS129263, NSF SHB1237174, Informatica Inc. gift and Couchbase Inc. gift.}
 }
 \subtitle{[Tutorial Summary]}
 
-\numberofauthors{1}
+\numberofauthors{2}
 
 \author{
-\alignauthor Yannis Papakonstantinou\\
-\affaddr{Computer Science and Engineering, UCSD}\\
-\email{yannis@cs.ucsd.edu}
+  \alignauthor Alin Deutsch\\
+    \affaddr{UC San Diego}\\
+    \email{deutsch@cs.ucsd.edu}
+  \alignauthor Yannis Papakonstantinou\\
+    \affaddr{UC San Diego}\\
+    \email{yannis@cs.ucsd.edu}
 }%
 
 
 \maketitle
 
 \begin{abstract}
-Numerous databases promoted as SQL-on-Hadoop, NewSQL and NoSQL support semi-structured, schemaless and heterogeneous data, typically in the form of enriched JSON. They also provide corresponding query languages.
-In addition to these {\em genuine JSON databases}, relational databases also provide special functions and language features for the support of JSON columns, typically piggybacking on non-1NF (non first normal form) features that SQL acquired over the years. We refer to SQL databases with JSON support as {\em SQL/JSON databases}. 
+  Numerous databases promoted as SQL-on-Hadoop, NewSQL and NoSQL support semi-structured, schemaless and heterogeneous data, typically in the form of graphs (often restricted to trees).
+  They also provide corresponding high-level query languages or graph-tailored programming paradigms.
 
-The evolving query languages present multiple variations: Some are superficial syntactic ones, while other ones are genuine differences in modeling, language capabilities and semantics. Incompatibility with SQL presents a learning challenge for genuine JSON databases, while the table orientation of SQL/JSON databases often leads to cumbersome syntactic/semantic structures that are contrary to the semistructured nature of JSON. Furthermore, the query languages often fall short of full-fledged semistructured query language capabilities, when compared to the yardstick set by XQuery and prior works on semistructured data (even after superficial model differences are abstracted out). 
+The evolving query languages present multiple variations: Some are superficial syntactic ones, while other ones are genuine differences in modeling, language capabilities and semantics. Incompatibility with SQL presents a learning challenge for genuine graph databases, while table orientation often leads to cumbersome syntactic/semantic structures that are contrary to graph data. Furthermore, the query languages often fall short of full-fledged semistructured query language capabilities, when compared to the yardstick set by XQuery and prior works on semistructured data (even after superficial model differences are abstracted out). 
 
-We survey features, the designers' options and differences in the approaches taken by actual systems. In particular, we first present a SQL backwards-compatible language, named \emph{SQL++}, which can access both SQL and JSON data. SQL++ is expected to be supported by Couchbase's CouchDB and UCI's AsterixDB semistructured databases. Then we expand SQL++ into the \emph{Configurable SQL++}, whereas multiple possible (and different) semantics are formally captured by the multiple options that the language's semantic configuration options can take. We show how appropriate setting of the configuration options morphs the Configurable SQL++ semantics into the semantics of 10 surveyed languages, hence providing a compact and formal tool to understand the essential semantic differences between different systems. We briefly comment on the utility of formally capturing semantic variations in polystore systems.
+We survey features, the designers' options and differences in the approaches taken by current systems. We cover both declarative query languages, whose semantics is
+independent of the underlying model of computation, as well as languages with an operational semantics that is more tightly coupled with the model of computation.
+For the well-represented class of languages over tree-shaped graphs (as motivated by the JSON and XML data models) 
+we present a SQL backwards-compatible language, named \emph{SQL++}, which can access both SQL and JSON data. SQL++ is supported by Couchbase's CouchDB and UCI's AsterixDB semistructured databases.
+We expand SQL++ into the \emph{Configurable SQL++}, whereas multiple possible (and different) semantics are formally captured by the multiple options that the language's semantic configuration options can take. We show how appropriate setting of the configuration options morphs the Configurable SQL++ semantics into the semantics of 10 surveyed languages, hence providing a compact and formal tool to understand the essential semantic differences between different systems. We briefly comment on the utility of formally capturing semantic variations in polystore systems.
 
-Finally we discuss the comparison with prior nested and semistructured query languages (notably OQL and XQuery) and describe a key aspect of query processor implementation: set-oriented semistructured query algebras. In particular, we transfer into the JSON era lessons from the semistructured query processing research of the 90s and 00s and combine them with insights on current JSON databases. Again, the tutorial presents the algebras' fundamentals while it abstracts away modeling differences that are not applicable.
+Finally we discuss the comparison with prior nested and semistructured query languages (notably OQL, XQuery, Lorel, StruQL, PigLatin) and we transfer into the modern graph database context lessons from the semistructured query processing research of the 90s and 00s, combining them with insights on current graph databases.
+%Again, the tutorial presents the algebras' fundamentals while it abstracts away modeling differences that are not applicable.
 \end{abstract}
 
 \begin{sloppypar}
@@ -161,6 +173,7 @@ Finally we discuss the comparison with prior nested and semistructured query lan
 \input{02-topic-and-audience}
 \input{03-challenges-in-comprehending-space}
 \input{04-a-systematic-survey}
+\input{05-other-data}
 
 \end{sloppypar}
 

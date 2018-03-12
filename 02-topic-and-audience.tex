@@ -1,20 +1,11 @@
 
-
-%\begin{compact_item}
-%\item \textbf{Duration:} The tutorial can be formatted to either 1.5 hours or 3 hours. We propose the \textbf{1.5 hour} format. See reasoning in Section~\ref{sec:duration}.
-%\item \textbf{Target Audience:} Given the amount of activity on database applied R\&D and the large number of practitioners working with semistructured data (esp. JSON) in the Bay Area, the tutorial is addressed to both academic researchers and such industry parties. The tutorial is also addressed to the database researcher and/or database practitioner who is interested in NoSQL, SQL/JSON and (broadly) semistructured data querying, although she may not be knowledgeable on the topic(s) currently.
-%\end{compact_item}
-
-\section{Introduction}
-This is a summary of the SIGMOD 2016 tutorial. \textit{The reader is referred to \textbf{http://db.ucsd.edu/TutorialSIGMOD16/} for the complete material, which includes the full presented slideware and extended companion papers.}
-
-
 \section{Topic and Audience of This Tutorial}
 Numerous databases promoted as SQL-on-Hadoop, NewSQL and NoSQL support Big Data applications. These databases generally support the 3Vs.% \cite{big-data-3v-oreilly-2012} 
 (i) Volume: amount of data (ii) Velocity: speed of data in and out (iii) \emph{Variety}: semi-structured, schemaless and heterogeneous data, which is the focus of this tutorial. Due to the Variety requirement, many databases have adopted semi-structured data models, which are generally slightly different subsets of enriched JSON. The databases provide corresponding query languages. 
 
 In addition to these {\em genuine JSON databases} that utilize variants of JSON as their data model, relational databases also provide special functions and language features for the support of JSON columns, often piggybacking on non-1NF (non first normal form) features that SQL acquired over the years. We refer to SQL databases with JSON support as {\em SQL/JSON databases}. 
 
+\arem{some of the new languages do not appear in the companion survey. Do we drop the prominent reference to it?}
 In total, the tutorial's evolving companion survey 
 %\cite{sqlpp-survey-2015} 
 discusses the following as of April 2016 (and potentially more by the time the reader accesses it).
@@ -30,12 +21,21 @@ discusses the following as of April 2016 (and potentially more by the time the r
 \item AsterixDB's AQL \cite{asterixdb-dpd-2011-all-authors}
 \item Google Big Query (aka Dremel \cite{dremel-pvldb-2010})
 \item Mongo JDBC \cite{unityjdbc} (a JDBC driver provided by the UnityJDBC middleware for SQL-compliant access to MongoDB)
+\item \arem{the following are new:}
+\item SparQL \cite{sparql}
+\item Neo4j's Cypher \cite{cypher}
+\item Facebook's GraphQL \cite{graphql}
+\item SparkSQL \cite{sparksql}
+\item Apache Gremlin \cite{gremlin}
+\item TigerGraph's GSQL \cite{gsql}
 \item SQL-92 - as the anchor of SQL compliance
 \end{compact_enum}
 
+
+\arem{dimensions: unrestricted graph vs tree, schema-less vs schema, declarative vs operational tied to computation model}
 Myriads of developers and researchers currently use genuine JSON databases as well as SQL/JSON databases. Database builders and researchers work on expanding the databases' query language abilities. Both parties face the challenges described below regarding surveying and comparing models and query languages, past and present. This tutorial provides a deep understanding of the current data models and query languages of genuine JSON and SQL/JSON databases, hence enabling comparisons. 
 
-The tutorial does not limit itself to the current status of JSON querying: The database builders and researchers need to draw lessons from the rich body of past research on nested \cite{nest-unnest-pods-1982,nested-relational-vldb-1988,nested-relational-workshop-lncs-1989}, object-oriented \cite{oql-dbpl-1989} and semistructured data models and querying \cite{xml-ql-computer-networks-1999,xml-query-language-survey-sigmod-record-2000,xquery-3.0-w3c-2013}, which have been a topic of intense database research: They were first researched in the form of labeled graphs in the mid-90s. Then semistructured data research boomed in the form of XML and its labeled tree abstraction. The current industrial boost to semistructured data emerged primarily from startups, often on the mobile and web space, that utilize Javascript and JSON.%
+The tutorial does not limit itself to the current status of graph querying: The database builders and researchers need to draw lessons from the rich body of past research on nested \cite{nest-unnest-pods-1982,nested-relational-vldb-1988,nested-relational-workshop-lncs-1989}, object-oriented \cite{oql-dbpl-1989} and semistructured data models and querying \cite{xml-ql-computer-networks-1999,xml-query-language-survey-sigmod-record-2000,xquery-3.0-w3c-2013}, which have been a topic of intense database research: They were first researched in the form of labeled graphs in the mid-90s. Then semistructured data research boomed in the form of XML and its labeled tree abstraction. The current industrial boost to semistructured data emerged primarily from startups, often on the mobile and web space, that utilize Javascript and JSON.%
 \footnote{Their JSON motivation is essentially the same one that the early semistructured research works had: flexible, schemaless data. Douglas Crockford's book ``Javascript: The Good Parts" characteristically muses about JSON that ``the less we need to agree on in order to interoperate, the more easily we can interoperate".
 }
 Many of the important language design issues of the first eras must be recalled in the new era of semistructured data.
@@ -43,27 +43,4 @@ Many of the important language design issues of the first eras must be recalled 
 Similarly, when it comes to implementations, we discuss set-at-a-time algebras for semistructured and object-oriented data, in the interest of transferring into the new space time-tested lessons on algebra-based relational query processing as well as lessons from set-at-a-time algebras from past research on nested relational algebra, OQL and XQuery \cite{GTP,XAT,OQL,SAL,DanaVLDB2004,Re06,MichielsTreePattern07,IoanaFQAS06,NicoleSerge,WiscMaier,Sartiani-Algebra,TAX,Enosys,Timber,NatixVLDBJ,Rainbow}. 
 
 More broadly, we compare SQL (which we use as a baseline) with the recent crop of semistructured databases and connect the recent activity around JSON querying to the (much richer) past activity on nested relational, OQL and XML/labeled tree models and respective query languages and implementations. 
-
-\section{Challenges in Comprehending the Space of Semistructured DBs}
-A first challenge is that the evolving query languages have many variations. Some variations are due to superficial syntactic differences that simply create ``noise" when one tries to understand and compare systems. However, other variations are genuine differences in query language capabilities and semantics.
-
-Indeed, the evolving query languages of both the genuine semistructured databases and the SQL/JSON databases fall short of full-fledged semi-structured query language capabilities.%
-\footnote{Most genuine semistructured databases also fall significantly short of full-fledged SQL capabilities, which is not surprising since many commercial JSON databases started as key-value and document-oriented databases.}
-The designers of the new query languages can gain by understanding and picking the salient features of past full-fledged \textit{declarative} query languages for non-relational data models: OQL \cite{oql-dbpl-1989}, the nested relational model \cite{nest-unnest-pods-1982,nested-relational-vldb-1988,nested-relational-workshop-lncs-1989}, 
-XQuery, and other XML query languages \cite{xquery-3.0-w3c-2013,xml-ql-computer-networks-1999,xml-query-language-survey-sigmod-record-2000}.
-
-Part of the confusion around current genuine JSON query languages is derived from the lack of compatibility with the well known SQL. In the interest of broadening the audience, this tutorial assumes that the audience is well-aware of SQL and the standard material of graduate textbooks on SQL system implementation. The tutorial does not assume knowledge of other query languages. Consequently we explain the JSON model and query languages as minimal extensions to SQL.S
-
-Similarly, part of the confusion and the large semantics behind SQL/JSON is due to the retrofit of SQL for JSON columns, while certain limitations of SQL (such as the need of a schema) remain in place. Again, the tutorial does not require knowledge of non-1NF, often proprietary, features that have been added to SQL. Rather it only requires textbook SQL-92 language and teaches the non-1NF concepts.
-
-A final challenge in understanding the new space of semistructured data is the lack of a succinct, mathematically clear, formal syntax and semantics by the vendors. 
-%SQL/JSON vendors efforts towards a upgrading on SQL generate unecessarily large syntax and semantics.
-
-In summary, the mentioned challenges and confusions hurt researchers and developers:
-
-\begin{enumerate}
-\item They inhibit a deep understanding of the capabilities and important idiosyncracies of the various query languages. Potential users can be lost in superficial details and miss fundamental points.
-\item They impede progress towards declarative languages and systems for querying semi-structured data. Language designers and query processor implementors need to appreciate the available options, in order to proceed to well-designed fully-fledged languages and efficient implementations thereof. 
-\end{enumerate}
-
 
