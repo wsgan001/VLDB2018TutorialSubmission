@@ -1,15 +1,13 @@
 
-\section{Challenges in Comprehending the Space of Semistructured DBs}
-A first challenge is that the evolving query languages have many variations. Some variations are due to superficial syntactic differences that simply create ``noise" when one tries to understand and compare systems. However, other variations are genuine differences in query language capabilities and semantics.
+\section{Challenges in Comprehending the Space of Graph and Nested Data DBs}
+A first challenge is that the evolving semistructured query languages have many variations. (By ``semistructured" we refer to both graph and nested data.) Some variations are due to superficial syntactic differences that simply create ``noise" when one tries to understand and compare systems. However, other variations are genuine differences in query language capabilities and semantics.
 
-Indeed, the evolving query languages of both the genuine semistructured databases and the SQL/JSON databases fall short of full-fledged semi-structured query language capabilities.%
-\footnote{Most genuine semistructured databases also fall significantly short of full-fledged SQL capabilities, which is not surprising since many commercial JSON databases started as key-value and document-oriented databases.}
+Indeed, the evolving query languages of both the genuine semistructured databases and the SQL/JSON databases fall short of full-fledged semi-structured query language capabilities - as set by early academic efforts in the 90s.%
+\footnote{Most semistructured databases also fall significantly short of full-fledged SQL capabilities.}
 The designers of the new query languages can gain by understanding and picking the salient features of past full-fledged \textit{declarative} query languages for non-relational data models: OQL \cite{oql-dbpl-1989}, the nested relational model \cite{nest-unnest-pods-1982,nested-relational-vldb-1988,nested-relational-workshop-lncs-1989}, 
 XQuery, and other XML query languages \cite{xquery-3.0-w3c-2013,xml-ql-computer-networks-1999,xml-query-language-survey-sigmod-record-2000}.
 
-Part of the confusion around current genuine JSON query languages is derived from the lack of compatibility with the well known SQL. In the interest of broadening the audience, this tutorial assumes that the audience is well-aware of SQL and the standard material of graduate textbooks on SQL system implementation. The tutorial does not assume knowledge of other query languages. Consequently we explain the JSON model and query languages as minimal extensions to SQL.S
-
-Similarly, part of the confusion and the large semantics behind SQL/JSON is due to the retrofit of SQL for JSON columns, while certain limitations of SQL (such as the need of a schema) remain in place. Again, the tutorial does not require knowledge of non-1NF, often proprietary, features that have been added to SQL. Rather it only requires textbook SQL-92 language and teaches the non-1NF concepts.
+Part of the confusion around semistructured query languages is derived from the lack of compatibility with the well known SQL. In the interest of broadening the audience, this tutorial assumes that the audience is well-aware of SQL and the standard material of graduate textbooks on SQL system implementation. The tutorial does not assume knowledge of other query languages. Consequently we explain the JSON model and query languages as minimal extensions to SQL. In particular SQL-92, as it represents the well-supported common denominator of all SQL systems and corresponds to normalized databases. The tutorial does not require knowledge of non-1NF, often proprietary, features that have been added to SQL-92. Rather it only requires textbook SQL-92 language and teaches the non-1NF concepts, as well as the graph concepts.
 
 A final challenge in understanding the new space of semistructured data is the lack of a succinct, mathematically clear, formal syntax and semantics by the vendors. 
 %SQL/JSON vendors efforts towards a upgrading on SQL generate unecessarily large syntax and semantics.
