@@ -152,18 +152,17 @@
 \maketitle
 
 \begin{abstract}
-  Numerous databases promoted as SQL-on-Hadoop, NewSQL and NoSQL support semi-structured, schemaless and heterogeneous data, typically in the form of graphs (often restricted to trees).
-  They also provide corresponding high-level query languages or graph-tailored programming paradigms.
+  Numerous databases support semi-structured, schemaless and heterogeneous data, typically in the form of graphs (often restricted to trees and nested data). They also provide corresponding high-level query languages or graph-tailored programming paradigms.
 
-The evolving query languages present multiple variations: Some are superficial syntactic ones, while other ones are genuine differences in modeling, language capabilities and semantics. Incompatibility with SQL presents a learning challenge for genuine graph databases, while table orientation often leads to cumbersome syntactic/semantic structures that are contrary to graph data. Furthermore, the query languages often fall short of full-fledged semistructured query language capabilities, when compared to the yardstick set by XQuery and prior works on semistructured data (even after superficial model differences are abstracted out). 
+The evolving query languages present multiple variations: Some are superficial syntactic ones, while other ones are genuine differences in modeling, language capabilities and semantics. Incompatibility with SQL presents a learning challenge for graph databases, while table orientation often leads to cumbersome syntactic/semantic structures that are contrary to graph data. Furthermore, the query languages often fall short of full-fledged semistructured and graph query language capabilities, when compared to the yardsticks set by prior academic efforts. 
 
 We survey features, the designers' options and differences in the approaches taken by current systems. We cover both declarative query languages, whose semantics is
 independent of the underlying model of computation, as well as languages with an operational semantics that is more tightly coupled with the model of computation.
-For the well-represented class of languages over tree-shaped graphs (as motivated by the JSON and XML data models) 
-we present a SQL backwards-compatible language, named \emph{SQL++}, which can access both SQL and JSON data. SQL++ is supported by Couchbase's CouchDB and UCI's AsterixDB semistructured databases.
-We expand SQL++ into the \emph{Configurable SQL++}, whereas multiple possible (and different) semantics are formally captured by the multiple options that the language's semantic configuration options can take. We show how appropriate setting of the configuration options morphs the Configurable SQL++ semantics into the semantics of 10 surveyed languages, hence providing a compact and formal tool to understand the essential semantic differences between different systems. We briefly comment on the utility of formally capturing semantic variations in polystore systems.
+For the declarative languages over both general graphs and tree-shaped graphs (as motivated by XML and the recent generation of nested formats, such as JSON and Parquet) 
+we present SQL extensions that capture the essentials of such database systems.
+More precisely, rather than presenting a single SQL extension, we present multiple configuration options whereas multiple possible (and different) semantics are formally captured by the multiple options that the language's semantic configuration options can take. We show how appropriate setting of the configuration options morphs the semantics into the semantics of multiple surveyed languages, hence providing a compact and formal tool to understand the essential semantic differences between different systems.
 
-Finally we discuss the comparison with prior nested and semistructured query languages (notably OQL, XQuery, Lorel, StruQL, PigLatin) and we transfer into the modern graph database context lessons from the semistructured query processing research of the 90s and 00s, combining them with insights on current graph databases.
+Finally we compare with prior nested and graph query languages (notably OQL, XQuery, Lorel, StruQL, PigLatin) and we transfer into the modern graph database context lessons from the semistructured query processing research of the 90s and 00s, combining them with insights on current graph databases.
 %Again, the tutorial presents the algebras' fundamentals while it abstracts away modeling differences that are not applicable.
 \end{abstract}
 
