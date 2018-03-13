@@ -1,14 +1,8 @@
 
 \section{Topic and Audience of This Tutorial}
-Numerous databases promoted as SQL-on-Hadoop, NewSQL and NoSQL support Big Data applications. These databases generally support the 3Vs.% \cite{big-data-3v-oreilly-2012} 
-(i) Volume: amount of data (ii) Velocity: speed of data in and out (iii) \emph{Variety}: semi-structured, schemaless and heterogeneous data, which is the focus of this tutorial. Due to the Variety requirement, many databases have adopted semi-structured data models, which are generally slightly different subsets of enriched JSON. The databases provide corresponding query languages. 
+Numerous graph and nested databases promoted as SQL-on-Hadoop, NewSQL and NoSQL support Big Data applications. These databases generally support semi-structured, schemaless and heterogeneous data, which is the focus of this tutorial. Broadly, the data models are either graphs, or trees (nested data) as exemplified by JSON and variations thereof. The databases provide corresponding query languages. We list below prominent graph and nested data databases covered in ths tutorial.
 
-In addition to these {\em genuine JSON databases} that utilize variants of JSON as their data model, relational databases also provide special functions and language features for the support of JSON columns, often piggybacking on non-1NF (non first normal form) features that SQL acquired over the years. We refer to SQL databases with JSON support as {\em SQL/JSON databases}. 
-
-\arem{some of the new languages do not appear in the companion survey. Do we drop the prominent reference to it?}
-In total, the tutorial's evolving companion survey 
-%\cite{sqlpp-survey-2015} 
-discusses the following as of April 2016 (and potentially more by the time the reader accesses it).
+\arem{some of the new languages do not appear in the companion survey. Do we drop the prominent reference to it? Yes}
 
 \begin{compact_enum}
 \item Apache Hive \cite{hive-icde-2010} (description of Hive largely applicable to Cloudera Impala \cite{impala} also)
@@ -31,16 +25,11 @@ discusses the following as of April 2016 (and potentially more by the time the r
 \item SQL-92 - as the anchor of SQL compliance
 \end{compact_enum}
 
-
 \arem{dimensions: unrestricted graph vs tree, schema-less vs schema, declarative vs operational tied to computation model}
-Myriads of developers and researchers currently use genuine JSON databases as well as SQL/JSON databases. Database builders and researchers work on expanding the databases' query language abilities. Both parties face the challenges described below regarding surveying and comparing models and query languages, past and present. This tutorial provides a deep understanding of the current data models and query languages of genuine JSON and SQL/JSON databases, hence enabling comparisons. 
+The audience of this tutorial is roughly divided in three categories: First, developers that want to use these databases are overwhelmed by their number and want to make sense of the options provided in this space. Second, database language designers who are building new features (for graph and nested data) and are interested in a deep analysis of the available options. Third, database builders and researchers who work on expanding the databases' query language abilities. Both parties face the challenges described below regarding surveying and comparing models and query languages, past and present. Both parties need a deep understanding of what is different from plain SQL. This tutorial provides a deep understanding of the current data models and query languages of graph and nested data databases, hence enabling comparisons. 
 
-The tutorial does not limit itself to the current status of graph querying: The database builders and researchers need to draw lessons from the rich body of past research on nested \cite{nest-unnest-pods-1982,nested-relational-vldb-1988,nested-relational-workshop-lncs-1989}, object-oriented \cite{oql-dbpl-1989} and semistructured data models and querying \cite{xml-ql-computer-networks-1999,xml-query-language-survey-sigmod-record-2000,xquery-3.0-w3c-2013}, which have been a topic of intense database research: They were first researched in the form of labeled graphs in the mid-90s. Then semistructured data research boomed in the form of XML and its labeled tree abstraction. The current industrial boost to semistructured data emerged primarily from startups, often on the mobile and web space, that utilize Javascript and JSON.%
-\footnote{Their JSON motivation is essentially the same one that the early semistructured research works had: flexible, schemaless data. Douglas Crockford's book ``Javascript: The Good Parts" characteristically muses about JSON that ``the less we need to agree on in order to interoperate, the more easily we can interoperate".
-}
+The tutorial does not limit itself to the current status of graph querying: The database builders and researchers need to draw lessons from the rich body of past research on nested \cite{nest-unnest-pods-1982,nested-relational-vldb-1988,nested-relational-workshop-lncs-1989}, object-oriented \cite{oql-dbpl-1989} and semistructured data models and querying \cite{xml-ql-computer-networks-1999,xml-query-language-survey-sigmod-record-2000,xquery-3.0-w3c-2013}, which have been a topic of intense database research: They were first researched in the form of labeled graphs in the mid-90s. Then semistructured data research boomed in the form of XML and its labeled tree abstraction. 
 Many of the important language design issues of the first eras must be recalled in the new era of semistructured data.
 
-Similarly, when it comes to implementations, we discuss set-at-a-time algebras for semistructured and object-oriented data, in the interest of transferring into the new space time-tested lessons on algebra-based relational query processing as well as lessons from set-at-a-time algebras from past research on nested relational algebra, OQL and XQuery \cite{GTP,XAT,OQL,SAL,DanaVLDB2004,Re06,MichielsTreePattern07,IoanaFQAS06,NicoleSerge,WiscMaier,Sartiani-Algebra,TAX,Enosys,Timber,NatixVLDBJ,Rainbow}. 
-
-More broadly, we compare SQL (which we use as a baseline) with the recent crop of semistructured databases and connect the recent activity around JSON querying to the (much richer) past activity on nested relational, OQL and XML/labeled tree models and respective query languages and implementations. 
+More broadly, we compare SQL (which we use as a baseline) with the recent crop of graph and nested databases and connect the recent activity around graph and JSON querying to the (much richer) past activity on nested relational, OQL and XML/labeled tree models and respective query languages and implementations. 
 
