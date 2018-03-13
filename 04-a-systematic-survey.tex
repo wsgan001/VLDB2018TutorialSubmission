@@ -3,10 +3,9 @@
 \noindent \textbf{Step 1: Extending the relational model and SQL for graphs} As discussed above, part of the confusion is derived from the lack of compatibility with the well-known, baseline SQL, which both researchers and practitioners generally understand.
 
 Towards a uniform explanation of the large space of current and past systems, this tutorial reduces the declarative languages to (minimally extended) SQL.
-We start by recalling the insight graphs can be modeled as relational databases by using appropriate vertex tables and edge tables. Vice versa, most relational databases can be viewed as graphs whose vertices are tuples and whose edges are key-foreign key pairs. We develop this analogy and show that multi-way SQL join queries correspond to fixed-length multi-hop path navigation. We then introduce introduce a series of minimal extensions that enhance the expressiveness of SQL towards reaching that of graph query languages.
+We start by recalling the insight that graphs can be modeled as relational databases by using appropriate vertex tables and edge tables. Vice versa, most relational databases can be viewed as graphs whose vertices are tuples and whose edges are key-foreign key pairs. We develop this analogy and show that multi-way SQL join queries correspond to fixed-length multi-hop path navigation. We then introduce a series of minimal extensions that enhance the expressiveness of SQL towards reaching that of graph query languages.
 
 One extension introduces controlled amounts of recursion via {\em path expressions} that specify reachability 
-%constraints 
 in the graph. We track the concept's evolution from early systems like OQL~\cite{oql-dbpl-1989},
 Lorel~\cite{lorel}, WebSQL~\cite{websql}, StruQL~\cite{struql} via the standard XPath/XQuery~\cite{XQuery}
 and the de facto standard Regular Path Queries (RPQs)~\cite{crpqs}, all the way to
@@ -20,11 +19,9 @@ We additionally demonstrate simultaneous construction of multiple linked tuples 
 Moreover, we show full compositionality, in the sense that subqueries can appear anywhere, potentially creating nested results when they appear in the \texttt{SELECT} clause.
 
 Query languages for unrestricted graphs {\em annotated with scalar data} are compared via reduction to this extended SQL.
-\arem{we need to make a high-level decision. SQL++ as is covers all the SQL/JSON dbs, but not the other graph databases. So we either formulate extensions to SQL++ (what shall we call
-  the resulting language?), or we define another, more general language and mention SQL++ as sublanguage that is already in circulation. Yannis: Let's stay away of names, per phone call.}
 
 We next shift attention to a highly important class of graphs: they are tree-shaped and annotated with non-1NF data.
-This class is motivated by the plethora of semistructured databases in circulation today for formats such as JSON and Parquet (as well as their XML precursors). Explicit id invention is not necessary any more, as the construction of tree structures is accomplished by nested (sub)queries. We draw the parralels between the two classes of languages (semistructured and graph) highlighting the simplifications emerging in the semistructured case. We incorprorate into the discussion salient features of past full-fledged declarative query languages for non-relational data models: SQL non-1NF features (starting with SQL 2003), OQL,
+This class is motivated by the plethora of semistructured databases in circulation today for formats such as JSON and Parquet (as well as their XML precursors). Explicit id invention is not necessary any more, as the construction of tree structures is accomplished by nested (sub)queries. We draw the parallels between the two classes of languages (semistructured and graph) highlighting the simplifications emerging in the semistructured case. We incorporate into the discussion salient features of past full-fledged declarative query languages for non-relational data models: SQL non-1NF features (starting with SQL 2003), OQL,
 % \cite{oql-dbpl-1989}, 
 the nested relational model and query languages,
 % \cite{nest-unnest-pods-1982,nested-relational-vldb-1988,nested-relational-workshop-lncs-1989} 
@@ -40,7 +37,8 @@ In this tutorial, a new student/researcher of graph and semistructured data, who
 
 After having taught Step 1, we will be able to show that multiple model and language differences are superficial syntactic differences.
 
-\noindent \textbf{Step 2: Substantial Semantic Differences} However, not all differences are superficial. Furthermore, this tutorial does not suggest that the SQL extension (or some close descendant thereof) will become a standard and remove the many variations that are now found in this space. There is too much variation and legacy for such to happen. Yet, the language designers and researchers need to know now the design options that are available to them and the options that have been used by others, especially as it pertains to the handling of schema-less aspects (semantics for paths leading to nowhere, semantics for type mismatches, etc). 
+\smallskip
+\noindent \textbf{Step 2: Substantial Semantic Differences} However, not all differences are superficial. Furthermore, this tutorial does not suggest that the SQL extension (or some close descendant thereof) will become a standard and remove the many variations that are now found in this space. There is too much variation and legacy for such to happen. Yet, the language designers and researchers need to know now the design options that are available to them and the options that have been used by others, especially as pertaining to the handling of schema-less aspects (semantics for paths leading to nowhere, semantics for type mismatches, etc). 
 Towards this goal the tutorial stresses the Configurable aspect of the presented SQL extension, which is essentially a guery language generator. Depending on the \textit{ configuration options} that are chosen for various features, different capabilities are assumed and different semantics emerge.
 
 One particular example where configuration options capture differences concisely, is the behavior of paths of the various query languages in the absence of information. For example, consider a JSON object \gt{\{a:1, b:2\}} and a path that navigates into the absent path \gt{c}. Languages differ on what is the result of \gt{c}. Is it an error? Is it a special value? If it is a special value, how does it behave in other features of the query language? Is the query writer given control on what special value may emerge or whether an error will be thrown? A configuration option captures these differences precisely. 
@@ -50,13 +48,16 @@ By appropriate choices of configuration options, the Configurable SQL++ semantic
 We expect that some of the results listed in the feature matrices describing configuration options will change in the next years as the space evolves rapidly.
 Despite the forthcoming changes, we expect the configuration-based aspect of our tutorial to remain a standing tool in understanding the space, since by understanding each database's capabilities in terms of applicable options, the reader can focus on the fundamental differences of the databases. 
 
+\smallskip
 \noindent \textbf{Step 3: Additional Features} We will also discuss features, many of which coming from XQuery, that have not been captured by configuration options. These will prompt a more open-ended discussion of language designs and trade-offs. A notable one is type coercion - the approaches and the pros and cons.
 
+\smallskip
 \noindent \textbf{Step 4: Languages with Operational Semantics Tied to the Computation Model}
 Recently we have witnessed a trend towards development of high-level graph query languages that are deliberately not purely declarative, instead featuring an operational semantics tied to the
 underlying computation model, which is typically a Bulk Synchronous Parallel (BSP) instance presented as a variation of the  Map-Reduce programming paradigm.
 Prominent examples are Gremlin and GSQL. We discuss this class of queries.
 
 
+\smallskip
 \noindent \textbf{Open Issues} Finally, we emphasize open issues in the expansion from structured to semistructured querying and briefly discuss interoperability challenges induced by language differences.
 
