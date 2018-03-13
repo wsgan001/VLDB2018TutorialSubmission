@@ -84,7 +84,7 @@ Couchbase.
 \newblock \url{http://www.couchbase.com/}.
 
 \bibitem{cypher}
-{Neo4j}'s query language {Cypher}.
+{Neo4j's Query Language Cypher}.
 \newblock \url{https://neo4j.com/developer/cypher-query-language/}.
 
 \bibitem{xml-ql-computer-networks-1999}
@@ -121,15 +121,15 @@ D.~Florescu, C.~Hillery, D.~Kossmann, P.~Lucas, F.~Riccardi, T.~Westmann,
 \newblock {\em VLDB Journal}, 13, 2004.
 
 \bibitem{graphql}
-Facebook's graphql.
+{Facebook's GraphQL}.
 \newblock \url{http://graphql.org/}.
 
 \bibitem{gremlin}
-Apache tinkerpop3 gremlin.
+{Apache TinkerPop3 Gremlin}.
 \newblock \url{http://tinkerpop.apache.org/docs/current/reference/}.
 
 \bibitem{gsql}
-Tigergraph's gsql.
+{TigerGraph's GSQL}.
 \newblock \url{http://doc.tigergraph.com/GSQL-Tutorial-and-Demo-Examples.html}.
 
 \bibitem{nest-unnest-pods-1982}
@@ -219,7 +219,7 @@ C.~Sartiani and A.~Albano.
 \newblock In {\em IDEAS}, 2002.
 
 \bibitem{sparksql}
-Apache spark sql.
+{Apache Spark SQL}.
 \newblock \url{https://spark.apache.org/sql/}.
 
 \bibitem{sparql}
