@@ -15,7 +15,6 @@ Numerous graph and nested databases promoted as SQL-on-Hadoop, NewSQL and NoSQL 
 \item AsterixDB's AQL \cite{asterixdb-dpd-2011-all-authors}
 \item Google Big Query (aka Dremel \cite{dremel-pvldb-2010})
 \item Mongo JDBC \cite{unityjdbc} (a JDBC driver provided by the UnityJDBC middleware for SQL-compliant access to MongoDB)
-\item \arem{the following are new:}
 \item SparQL \cite{sparql}
 \item Neo4j's Cypher \cite{cypher}
 \item Facebook's GraphQL \cite{graphql}
@@ -25,7 +24,7 @@ Numerous graph and nested databases promoted as SQL-on-Hadoop, NewSQL and NoSQL 
 \item SQL-92 - as the anchor of SQL compliance
 \end{compact_enum}
 
-\arem{dimensions: unrestricted graph vs tree, schema-less vs schema, declarative vs operational tied to computation model}
+
 The audience of this tutorial is roughly divided in three categories: First, developers that want to use these databases are overwhelmed by their number and want to make sense of the options provided in this space. Second, database language designers who are building new features (for graph and nested data) and are interested in a deep analysis of the available options. Third, database builders and researchers who work on expanding the databases' query language abilities. Both parties face the challenges described below regarding surveying and comparing models and query languages, past and present. Both parties need a deep understanding of what is different from plain SQL. This tutorial provides a deep understanding of the current data models and query languages of graph and nested data databases, hence enabling comparisons. 
 
 The tutorial does not limit itself to the current status of graph querying: The database builders and researchers need to draw lessons from the rich body of past research on nested \cite{nest-unnest-pods-1982,nested-relational-vldb-1988,nested-relational-workshop-lncs-1989}, object-oriented \cite{oql-dbpl-1989} and semistructured data models and querying \cite{xml-ql-computer-networks-1999,xml-query-language-survey-sigmod-record-2000,xquery-3.0-w3c-2013}, which have been a topic of intense database research: They were first researched in the form of labeled graphs in the mid-90s. Then semistructured data research boomed in the form of XML and its labeled tree abstraction. 
