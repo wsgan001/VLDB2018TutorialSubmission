@@ -16,6 +16,13 @@ S.~Abiteboul, D.~Quass, J.~McHugh, J.~Widom, and J.~L. Wiener.
 \newblock The lorel query language for semistructured data.
 \newblock {\em Int. J. on Digital Libraries}, 1(1):68--88, 1997.
 
+\bibitem{crpqs}
+S.~Abiteboul and V.~Vianu.
+\newblock Regular path queries with constraints.
+\newblock In {\em Proceedings of the Sixteenth {ACM} {SIGACT-SIGMOD-SIGART}
+  Symposium on Principles of Database Systems, May 12-14, 1997, Tucson,
+  Arizona, {USA}}, pages 122--133, 1997.
+
 \bibitem{IoanaFQAS06}
 A.~Arion, V.~Benzaken, I.~Manolescu, Y.~Papakonstantinou, and R.~Vijay.
 \newblock Algebra-based identification of tree patterns in {XQuery}.
@@ -112,6 +119,10 @@ D.~Florescu, C.~Hillery, D.~Kossmann, P.~Lucas, F.~Riccardi, T.~Westmann,
   M.~Carey, and A.~Sundararajan.
 \newblock The {BEA} streaming {XQuery} processor.
 \newblock {\em VLDB Journal}, 13, 2004.
+
+\bibitem{graphql}
+Facebook's graphql.
+\newblock \url{http://graphql.org/}.
 
 \bibitem{gremlin}
 Apache tinkerpop3 gremlin.
@@ -210,6 +221,10 @@ C.~Sartiani and A.~Albano.
 \bibitem{sparksql}
 Apache spark sql.
 \newblock \url{https://spark.apache.org/sql/}.
+
+\bibitem{sparql}
+{The RDF Query Language SPARQL}.
+\newblock \url{https://jena.apache.org/tutorials/sparql.html}.
 
 \bibitem{hive-icde-2010}
 A.~Thusoo, J.~S. Sarma, N.~Jain, Z.~Shao, P.~Chakka, N.~Zhang, S.~Anthony,
