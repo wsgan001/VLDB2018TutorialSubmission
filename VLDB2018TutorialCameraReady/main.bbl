@@ -1,0 +1,260 @@
+\begin{thebibliography}{10}
+
+\bibitem{NicoleSerge}
+S.~Abiteboul and N.~Bidoit.
+\newblock Non first normal form relations: An algebra allowing data
+  restructuring.
+\newblock {\em JCSS}, 33(3):361--393, 1986.
+
+\bibitem{nested-relational-workshop-lncs-1989}
+S.~Abiteboul, P.~C. Fischer, and H.-J. Schek, editors.
+\newblock {\em Nested Relations and Complex Objects}, volume 361 of {\em
+  Lecture Notes in Computer Science}. Springer, 1989.
+
+\bibitem{lorel}
+S.~Abiteboul, D.~Quass, J.~McHugh, J.~Widom, and J.~L. Wiener.
+\newblock The lorel query language for semistructured data.
+\newblock {\em Int. J. on Digital Libraries}, 1(1):68--88, 1997.
+
+\bibitem{crpqs}
+S.~Abiteboul and V.~Vianu.
+\newblock Regular path queries with constraints.
+\newblock In {\em Proceedings of the Sixteenth {ACM} {SIGACT-SIGMOD-SIGART}
+  Symposium on Principles of Database Systems, May 12-14, 1997, Tucson,
+  Arizona, {USA}}, pages 122--133, 1997.
+
+\bibitem{IoanaFQAS06}
+A.~Arion, V.~Benzaken, I.~Manolescu, Y.~Papakonstantinou, and R.~Vijay.
+\newblock Algebra-based identification of tree patterns in {XQuery}.
+\newblock In {\em FQAS}, pages 13--25, 2006.
+
+\bibitem{oql-dbpl-1989}
+F.~Bancilhon, S.~Cluet, and C.~Delobel.
+\newblock A query language for the {O2} object-oriented database system.
+\newblock In {\em DBPL}, pages 122--138, 1989.
+
+\bibitem{SAL}
+C.~Beeri and Y.~Tzaban.
+\newblock {SAL}: An algebra for semistructured data and {XML}.
+\newblock In {\em WebDB}, 1999.
+
+\bibitem{asterixdb-dpd-2011-all-authors}
+A.~Behm, V.~R. Borkar, M.~J. Carey, R.~Grover, C.~Li, N.~Onose, R.~Vernica,
+  A.~Deutsch, Y.~Papakonstantinou, and V.~J. Tsotras.
+\newblock {ASTERIX}: towards a scalable, semistructured data platform for
+  evolving-world models.
+\newblock {\em Distributed and Parallel Databases}, 29(3):185--216, 2011.
+
+\bibitem{jaql-pvldb-2011}
+K.~S. Beyer, V.~Ercegovac, R.~Gemulla, A.~Balmin, M.~Y. Eltabakh, C.-C. Kanne,
+  F.~{\"O}zcan, and E.~J. Shekita.
+\newblock Jaql: A scripting language for large scale semistructured data
+  analysis.
+\newblock {\em PVLDB}, 4(12):1272--1283, 2011.
+
+\bibitem{xml-query-language-survey-sigmod-record-2000}
+A.~Bonifati and S.~Ceri.
+\newblock Comparative analysis of five {XML} query languages.
+\newblock {\em SIGMOD Record}, 29(1):68--79, 2000.
+
+\bibitem{couchbase-sigmod-2016}
+D.~Borkar, R.~Mayurum, G.~Sangudi, and M.~Carey.
+\newblock Have your data and query it too: From key-value caching to big data
+  management.
+\newblock In {\em SIGMOD Conference}, 2016.
+
+\bibitem{GTP}
+Z.~Chen, H.~Jagadish, L.~Lakshmanan, and S.~Paparizos.
+\newblock From tree patterns to generalized tree patterns: On efficient
+  evaluation of {XQuery}.
+\newblock In {\em VLDB}, 2003.
+
+\bibitem{impala}
+Cloudera {Impala}.
+\newblock
+  \url{http://www.cloudera.com/content/cloudera/en/products-and-services/cdh/impala.html}.
+
+\bibitem{OQL}
+S.~Cluet and G.~Moerkotte.
+\newblock Nested queries in object bases.
+\newblock Technical report, 1995.
+
+\bibitem{couchbase}
+Couchbase.
+\newblock \url{http://www.couchbase.com/}.
+
+\bibitem{cypher}
+{Neo4j's Query Language Cypher}.
+\newblock \url{https://neo4j.com/developer/cypher-query-language/}.
+
+\bibitem{xml-ql-computer-networks-1999}
+A.~Deutsch, M.~F. Fern{\'a}ndez, D.~Florescu, A.~Y. Levy, and D.~Suciu.
+\newblock A query language for {XML}.
+\newblock {\em Computer Networks}, 31(11-16):1155--1169, 1999.
+
+\bibitem{DugganESBHKMMMZ15}
+J.~Duggan, A.~J. Elmore, M.~Stonebraker, M.~Balazinska, B.~Howe, J.~Kepner,
+  S.~Madden, D.~Maier, T.~Mattson, and S.~B. Zdonik.
+\newblock The bigdawg polystore system.
+\newblock {\em {SIGMOD} Record}, 44(2):11--16, 2015.
+
+\bibitem{struql}
+M.~F. Fern{\'{a}}ndez, D.~Florescu, A.~Y. Levy, and D.~Suciu.
+\newblock Declarative specification of web sites with strudel.
+\newblock {\em {VLDB} J.}, 9(1):38--55, 2000.
+
+\bibitem{NatixVLDBJ}
+T.~Fiebig, S.~Helmer, C.~Kanne, G.~Moerkotte, J.~Neumann, R.~Schiele, and
+  T.~Westmann.
+\newblock Anatomy of a native {XML} base management system.
+\newblock {\em VLDB J}, 11(4), 2002.
+
+\bibitem{jsoniq-ieee-ic-2013}
+D.~Florescu and G.~Fourny.
+\newblock {JSONiq}: The history of a query language.
+\newblock {\em IEEE Internet Computing}, 17(5):86--90, 2013.
+
+\bibitem{DanaVLDB2004}
+D.~Florescu, C.~Hillery, D.~Kossmann, P.~Lucas, F.~Riccardi, T.~Westmann,
+  M.~Carey, and A.~Sundararajan.
+\newblock The {BEA} streaming {XQuery} processor.
+\newblock {\em VLDB Journal}, 13, 2004.
+
+\bibitem{graphql}
+{Facebook's GraphQL}.
+\newblock \url{http://graphql.org/}.
+
+\bibitem{gremlin}
+{Apache TinkerPop3 Gremlin}.
+\newblock \url{http://tinkerpop.apache.org/docs/current/reference/}.
+
+\bibitem{gsql}
+{TigerGraph's GSQL}.
+\newblock \url{http://doc.tigergraph.com/GSQL-Tutorial-and-Demo-Examples.html}.
+
+\bibitem{nest-unnest-pods-1982}
+G.~Jaeschke and H.-J. Schek.
+\newblock Remarks on the algebra of non first normal form relations.
+\newblock In {\em {PODS}}, pages 124--138. ACM, 1982.
+
+\bibitem{Timber}
+H.~V. Jagadish, S.~Al-Khalifa, A.~Chapman, L.~V.~S. Lakshmanan, A.~Nierman,
+  S.~Paparizos, J.~M. Patel, D.~Srivastava, N.~Wiwatwattana, Y.~Wu, and C.~Yu.
+\newblock {TIMBER}: A native {XML} database.
+\newblock {\em VLDB Journal}, 11(4):274--291, 2002.
+
+\bibitem{TAX}
+H.~V. Jagadish, L.~V.~S. Lakshmanan, D.~Srivastava, and K.~Thompson.
+\newblock {TAX}: A tree algebra for {XML}.
+\newblock In {\em DBPL}, 2001.
+
+\bibitem{cassandra-osr-2010}
+A.~Lakshman and P.~Malik.
+\newblock Cassandra: a decentralized structured storage system.
+\newblock {\em Operating Systems Review}, 44(2):35--40, 2010.
+
+\bibitem{dremel-pvldb-2010}
+S.~Melnik, A.~Gubarev, J.~J. Long, G.~Romer, S.~Shivakumar, M.~Tolton, and
+  T.~Vassilakis.
+\newblock Dremel: Interactive analysis of web-scale datasets.
+\newblock {\em PVLDB}, 3(1):330--339, 2010.
+
+\bibitem{websql}
+A.~O. Mendelzon, G.~A. Mihaila, and T.~Milo.
+\newblock Querying the world wide web.
+\newblock {\em Int. J. on Digital Libraries}, 1(1):54--67, 1997.
+
+\bibitem{MichielsTreePattern07}
+P.~Michiels, G.~A. Mihaila, and J.~Sim\'eon.
+\newblock Put a {T}ree {P}attern in {Y}our {A}lgebra.
+\newblock In {\em ICDE}, 2007.
+
+\bibitem{mongodb}
+{MongoDB}.
+\newblock \url{http://www.mongodb.org/}.
+
+\bibitem{pig-sigmod-2008}
+C.~Olston, B.~Reed, U.~Srivastava, R.~Kumar, and A.~Tomkins.
+\newblock Pig {Latin}: a not-so-foreign language for data processing.
+\newblock In {\em SIGMOD Conference}, pages 1099--1110, 2008.
+
+\bibitem{sqlpp-survey-2015}
+K.~W. Ong, Y.~Papakonstantinou, and R.~Vernoux.
+\newblock {SQL++}: An expressiveness benchmark of {SQL-on-Hadoop}, {NoSQL} and
+  {NewSQL} databases, 2015.
+\newblock \url{http://db.ucsd.edu/wp-content/uploads/pdfs/375.pdf}.
+
+\bibitem{sqlpp-extended-corr-2015}
+K.~W. Ong, Y.~Papakonstantinou, and R.~Vernoux.
+\newblock The {SQL++} query language: Configurable, unifying and
+  semi-structured.
+\newblock {\em CoRR}, abs/1405.3631, 2015.
+\newblock \url{http://arxiv.org/abs/1405.3631}.
+
+\bibitem{Enosys}
+Y.~Papakonstantinou, V.~R. Borkar, M.~Orgiyan, K.~Stathatos, L.~Suta,
+  V.~Vassalos, and P.~Velikhov.
+\newblock {XML} queries and algebra in the {Enosys} integration platform.
+\newblock {\em Data Knowl. Eng.}, 44(3):299--322, 2003.
+
+\bibitem{Re06}
+C.~Re, J.~Sim\'eon, and M.~Fern\'andez.
+\newblock A complete and efficient algebraic compiler for {XQuery}.
+\newblock In {\em ICDE}, 2006.
+
+\bibitem{xquery-3.0-w3c-2013}
+J.~Robie, D.~Chamberlin, M.~Dyck, and J.~Snelson.
+\newblock {XQuery} 3.0: An {XML} query language, {W3C} candidate
+  recommendation, 2013.
+\newblock \url{http://www.w3.org/TR/2013/PR-xquery-30-20131022/}.
+
+\bibitem{nested-relational-vldb-1988}
+M.~A. Roth, H.~F. Korth, and A.~Silberschatz.
+\newblock Extended algebra and calculus for nested relational databases.
+\newblock {\em ACM Trans. Database Syst.}, 13(4):389--417, 1988.
+
+\bibitem{Sartiani-Algebra}
+C.~Sartiani and A.~Albano.
+\newblock Yet another query algebra for {XML} data.
+\newblock In {\em IDEAS}, 2002.
+
+\bibitem{sparksql}
+{Apache Spark SQL}.
+\newblock \url{https://spark.apache.org/sql/}.
+
+\bibitem{sparql}
+{The RDF Query Language SPARQL}.
+\newblock \url{https://jena.apache.org/tutorials/sparql.html}.
+
+\bibitem{hive-icde-2010}
+A.~Thusoo, J.~S. Sarma, N.~Jain, Z.~Shao, P.~Chakka, N.~Zhang, S.~Anthony,
+  H.~Liu, and R.~Murthy.
+\newblock Hive - a petabyte scale data warehouse using {Hadoop}.
+\newblock In {\em ICDE}, pages 996--1005, 2010.
+
+\bibitem{unityjdbc}
+{JDBC} driver for {MongoDB}.
+\newblock \url{http://www.unityjdbc.com/mongojdbc/mongosqltranslate.php}.
+
+\bibitem{WiscMaier}
+S.~D.~. Viglas, L.~Galanis, D.~J. DeWitt, D.~Maier, and J.~F. Naughton.
+\newblock Putting {XML} query algebras into context.
+\newblock Available at:~\textsf{\small
+  http://www.cs.wisc.edu/niagara/Publications.html}.
+
+\bibitem{XQuery}
+The {XQ}uery language.
+\newblock www.w3.org/TR/xquery, 2004.
+
+\bibitem{XAT}
+X.~Zhang, B.~Pielech, and E.~Rundensteiner.
+\newblock Honey, {I} shrunk the {XQuery}!: An {XML} algebra optimization
+  approach.
+\newblock In {\em WIDM}, 2002.
+
+\bibitem{Rainbow}
+X.~Zhang and E.~Rundensteiner.
+\newblock {XAT}: {XML} algebra for {Rainbow} system.
+\newblock Technical Report. WPI-CS-TR-02-24, July 2002.
+
+\end{thebibliography}

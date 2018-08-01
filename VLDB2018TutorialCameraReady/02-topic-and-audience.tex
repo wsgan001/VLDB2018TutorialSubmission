@@ -1,0 +1,37 @@
+
+\section{Tutorial Topic and Audience}
+Numerous graph and nested databases promoted as SQL-on-Hadoop, NewSQL and NoSQL support Big Data applications. These databases generally support semi-structured, schemaless and heterogeneous data, which is the focus of this tutorial. Broadly, the data models are either graphs, or trees (nested data) as exemplified by JSON and variations thereof. The databases provide corresponding query languages. We review characteristic ones: Apache Hive \cite{hive-icde-2010},  MongoDB \cite{mongodb}, Couchbase's N1QL \cite{couchbase,couchbase-sigmod-2016}, SPARQL \cite{sparql}, Neo4j's Cypher \cite{cypher}, Facebook's GraphQL \cite{graphql}, Apache Spark SQL \cite{sparksql}, CosmosDB, Apache Gremlin \cite{gremlin}, TigerGraph's GSQL \cite{gsql}. We use SQL-92 as the anchor of SQL compliance and also comment on additional databases and query languages (\cite{impala,cosmosdb,bigquery,jaql-pvldb-2011,jsoniq-ieee-ic-2013,asterixdb-dpd-2011-all-authors}).
+
+\eat{
+We list below prominent graph and nested data databases covered in ths tutorial.
+
+\arem{some of the new languages do not appear in the companion survey. Do we drop the prominent reference to it? Yes}
+
+\begin{compact_enum}
+\item Apache Hive \cite{hive-icde-2010} (description of Hive largely applicable to Cloudera Impala \cite{impala} also)
+\item IBM Jaql \cite{jaql-pvldb-2011}
+\item Apache Pig \cite{pig-sigmod-2008}
+\item Apache Cassandra CQL \cite{cassandra-osr-2010}
+\item MongoDB \cite{mongodb}
+\item Couchbase's N1QL \cite{couchbase,couchbase-sigmod-2016}
+\item JSONiq \cite{jsoniq-ieee-ic-2013}
+\item AsterixDB's AQL \cite{asterixdb-dpd-2011-all-authors}
+%\item Google Big Query (aka Dremel \cite{dremel-pvldb-2010})
+\item Mongo JDBC \cite{unityjdbc} (a JDBC driver provided by the UnityJDBC middleware for SQL-compliant access to MongoDB)
+\item SPARQL \cite{sparql}
+\item Neo4j's Cypher \cite{cypher}
+\item Facebook's GraphQL \cite{graphql}
+\item Apache Spark SQL \cite{sparksql}
+\item Apache Gremlin \cite{gremlin}
+\item TigerGraph's GSQL \cite{gsql}
+\item SQL-92 - as the anchor of SQL compliance
+\end{compact_enum}
+}
+
+The audience of this tutorial is roughly divided in three categories: First, developers that want to use these databases are overwhelmed by their number and want to make sense of the options provided in this space. Second, database language designers who are building new features (for graph and nested data) and are interested in a deep analysis of the available options. Third, database builders and researchers who work on expanding the databases' query language abilities. Both parties face the challenges described below regarding surveying and comparing models and query languages, past and present. Both parties need a deep understanding of what is different from plain SQL. This tutorial provides a deep understanding of the current data models and query languages of graph and nested data databases, hence enabling comparisons. 
+
+The tutorial does not limit itself to the current status of graph querying: The database builders and researchers need to draw lessons from the rich body of past research on nested \cite{nest-unnest-pods-1982,nested-relational-vldb-1988,nested-relational-workshop-lncs-1989}, object-oriented \cite{oql-dbpl-1989} and semistructured data models and querying \cite{xml-ql-computer-networks-1999,xml-query-language-survey-sigmod-record-2000,xquery-3.0-w3c-2013}, which have been a topic of intense database research: They were first researched in the form of labeled graphs in the mid-90s. Then semistructured data research boomed in the form of XML and its labeled tree abstraction. 
+Many of the important language design issues of the first eras must be recalled in the new era of semistructured data.
+
+More broadly, we compare SQL (which we use as a baseline) with the recent crop of graph and nested databases and connect the recent activity around graph and JSON querying to the (much richer) past activity on nested relational, OQL and XML/labeled tree models and respective query languages and implementations. 
+

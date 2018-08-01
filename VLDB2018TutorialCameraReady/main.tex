@@ -1,0 +1,190 @@
+\documentclass{vldb}
+
+
+\input{preamble}
+
+% http://tex.stackexchange.com/questions/32683/rotated-column-titles-in-tabular
+\usepackage{adjustbox}
+\newcolumntype{R}[2]{%
+    >{\adjustbox{angle=#1,lap=\width-(#2)}\bgroup}%
+    l%
+    <{\egroup}%
+}
+\newcommand*\rot[2]{\multicolumn{1}{R{#1}{#2}}}% no optional argument here, please!
+
+\usepackage{pifont}
+\usepackage{wasysym}
+
+
+\newcolumntype{B}{|@{~}r@{~}|@{~}l@{~}c@{~}l@{~}|}  % (B)NF
+\newcolumntype{E}{@{}l@{~}c@{~}l@{}}                % (E)valuation Semantics
+\newcolumntype{N}{@{}l@{}}                          % (N)arrow
+
+\newcommand{\header}[1]{\multicolumn{1}{c|}{\textbf{#1}}}
+\newcommand{\feature}[1]{\textbf{#1}:}
+
+\usepackage{balance}
+\vldbAuthors{A. Deutsch, Y. Papakonstantinou}
+\vldbTitle{Graph Data Models, Query Languages and Programming Paradigms}
+\vldbDOI{https://doi.org/TBD}
+
+\begin{document}
+
+% Copyright
+%\setcopyright{acmcopyright}
+%\setcopyright{acmlicensed}
+%\setcopyright{rightsretained}
+%\setcopyright{usgov}
+%\setcopyright{usgovmixed}
+%\setcopyright{cagov}
+%\setcopyright{cagovmixed}
+
+%\CopyrightYear{2016} 
+%\isbn{978-1-4503-3531-7/16/06}
+%\acmPrice{\$15.00}
+%\doi{http://dx.doi.org/10.1145/2882903.2912573}
+%\conferenceinfo{SIGMOD'16,}{June 26-July 01, 2016, San Francisco, CA, USA}
+
+
+%------------------------------------------------------------------------------- 
+% Macros
+%------------------------------------------------------------------------------- 
+
+% Set the version text flags on the "optional" package
+%\setversiontextflags
+
+% Redefine \_ for a shorter rule, so that BNF non-terminals with two (or more words) are compacted together
+% http://tex.stackexchange.com/questions/4375/chardef-and-underscore
+%\DeclareTextCommand{\_}{T1}{\leavevmode \kern.06em\vbox{\hrule width.4em}}
+
+%\def\sugar{\cellcolor[gray]{0.8}}
+\def\sugar{\rowcolor[gray]{0.85}}
+
+\def\sql{A}
+\def\cql{B}
+\def\mongodb{C}
+\def\nickel{D}
+\def\aql{E}
+\def\jaql{F}
+
+\def\env{\mathrm{\Gamma}}
+
+\def\yes{$\checkmark$}
+\def\error{$\times$}
+\def\true{\texttt{t}}
+\def\false{\texttt{f}}
+\def\nulloption{\texttt{n}}
+\def\missing{\texttt{m}}
+\def\counter{\texttt{c}}
+\def\partial{\LEFTcircle}
+\def\irrelevant{-}
+\def\inconsistent{\ding{106}}
+% \def\same{\cellcolor[gray]{0.8}}
+
+\def\ground{G}
+\def\collscan{S^C}
+\def\outercollscan{O^C}
+\def\tuplescan{S^T}
+\def\outertuplescan{O^T}
+\def\tuplenav{N^T}
+\def\arraynav{N^A}
+\def\constructcoll{C^C}
+\def\constructtuple{C^T}
+\def\applyplan{\alpha}
+\def\corr{R}
+\def\flat{F}
+
+\def\evalto{\leadsto}
+\def\group{f_\texttt{GROUP}}
+\def\order{<^o}
+%\def\order{f_\texttt{ORDER}}
+\def\arr{\operatorname{array}}
+\def\bag{\operatorname{bag}}
+\def\tuple{\operatorname{tuple}}
+\def\map{\operatorname{map}}
+\def\fst{\operatorname{fst}}
+\def\sub{\operatorname{sub}}
+\def\sort{\operatorname{sort}}
+\def\setop{\operatorname{set\_op}}
+\def\union{\operatorname{union}}
+\def\unionall{\operatorname{union\_all}}
+\def\intersect{\operatorname{intersect}}
+\def\intersectall{\operatorname{intersect\_all}}
+\def\except{\operatorname{except}}
+\def\exceptall{\operatorname{except\_all}}
+\def\setopeq{\overset{@}{=}}
+
+\newcommand{\inrecord}[1]   { {#1}_{\operatorname{in}} } % {\dot{#1}}
+\newcommand{\outrecord}[1]  { {#1}_{\operatorname{out}} } % {\ddot{#1}}
+\newcommand{\inbinding}[1]  { {#1}_{\operatorname{in}} }
+\newcommand{\outbinding}[1] { {#1}_{\operatorname{out}} }
+
+\newcommand{\id}[1]{{#1}^{id}}
+
+\newcommand{\update}[2]{\gl{update}(#1,#2)}
+\newcommand{\insertbag}[2]{\gl{insertinbag}(#1,#2)}
+\newcommand{\inserttuple}[3]{\gl{inserinttuple}(#1,#2,#3)}
+\newcommand{\append}[2]{\gl{append}(#1,#2)}
+\newcommand{\delete}[1]{\gl{delete}(#1)}
+\newcommand{\insertorder}[2]{\gl{insertorder}(#1,#2)}
+
+
+\newcommand{\highlight}[1]{\noindent\textbf{#1:}}
+
+
+\newcommand{\arem}[1]{{\begin{small}\color{blue}{#1\ --alin}\end{small}}}
+\renewcommand{\arem}[1]{}
+\newcommand{\yrem}[1]{{\begin{small}\color{red}{#1\ --yannis}\end{small}}}
+\renewcommand{\yrem}[1]{}
+\newcommand{\eat}[1]{}
+
+\title{Graph Data Models, Query Languages and Programming Paradigms
+\titlenote{Supported by NSF IIS129263, NSF SHB1237174, Informatica Inc. gift and Couchbase Inc. gift.}
+}
+\subtitle{[Tutorial Summary]}
+
+\numberofauthors{2}
+
+\author{
+  \alignauthor Alin Deutsch\\
+    \affaddr{UC San Diego}\\
+    \email{deutsch@cs.ucsd.edu}
+  \alignauthor Yannis Papakonstantinou\\
+    \affaddr{UC San Diego}\\
+    \email{yannis@cs.ucsd.edu}
+}%
+
+
+
+\maketitle
+
+\begin{abstract}
+  Numerous databases support semi-structured, schemaless and heterogeneous data, typically in the form of graphs (often restricted to trees and nested data). They also provide corresponding high-level query languages or graph-tailored programming paradigms.
+
+The evolving query languages present multiple variations: Some are superficial syntactic ones, while other ones are genuine differences in modeling, language capabilities and semantics. Incompatibility with SQL presents a learning challenge for graph databases, while table orientation often leads to cumbersome syntactic/semantic structures that are contrary to graph data. Furthermore, the query languages often fall short of full-fledged semistructured and graph query language capabilities, when compared to the yardsticks set by prior academic efforts. 
+
+We survey features, the designers' options and differences in the approaches taken by current systems. We cover both declarative query languages, whose semantics is
+independent of the underlying model of computation, as well as languages with an operational semantics that is more tightly coupled with the model of computation.
+For the declarative languages over both general graphs and tree-shaped graphs (as motivated by XML and the recent generation of nested formats, such as JSON and Parquet) 
+we compare to an SQL baseline and present SQL reductions and extensions that capture the essentials of such database systems.
+More precisely, rather than presenting a single SQL extension, we present multiple configuration options whereas multiple possible (and different) semantics are formally captured by the multiple options that the language's semantic configuration options can take. We show how appropriate setting of the configuration options morphs the semantics into the semantics of multiple surveyed languages, hence providing a compact and formal tool to understand the essential semantic differences between different systems.
+
+Finally we compare with prior nested and graph query languages (notably OQL, XQuery, Lorel, StruQL, PigLatin) and we transfer into the modern graph database context lessons from the semistructured query processing research of the 90s and 00s, combining them with insights on current graph databases.
+%Again, the tutorial presents the algebras' fundamentals while it abstracts away modeling differences that are not applicable.
+\end{abstract}
+
+\begin{sloppypar}
+
+\input{02-topic-and-audience}
+\input{03-challenges-in-comprehending-space}
+\input{04-a-systematic-survey}
+\input{05-other-data}
+
+\end{sloppypar}
+
+
+% Bibliography
+\bibliographystyle{abbrv}
+\bibliography{main,lot}
+
+\end{document}
